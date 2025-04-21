@@ -1,0 +1,23 @@
+{
+  "name": "strix_cypress-template",
+  "version": "1.2.0",
+  "description": "This project is a Cypress Template For Strix",
+  "main": "index.js",
+  "scripts": {
+    "cypress:local": "cypress open --e2e --browser chrome",
+    "cypress:e2e": "cypress run --spec cypress/e2e/*"
+  },
+  "keywords": [
+    "cypress"
+  ],
+  "type": "module",
+  "author": "Marcelo Alejandro Ares",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "22.14.1",
+    "cypress": "13.17.0",
+    "cypress-mochawesome-reporter": "3.8.2",
+    "dotenv": "16.5.0",
+    "typescript": "5.8.3"
+  }
+}

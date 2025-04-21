@@ -1,0 +1,85 @@
+Caso de Prueba 1 – Registro exitoso
+Título: Registro en Strix con datos validos
+Precondición: El email no debe estar registrado en la base de datos
+Steps:
+    1. Ingresar a https://clientes.test.aws.consumer.strix.com.ar/
+    2. Hacer click en "Crear cuenta"
+    3. Completar el campo Email con un correo validos, en donde contenga "@" como obligatorio
+    4. Completar el campo Contraseña de mas de 6 caracteres
+    5. Continuar para completar Perfil
+    6. Completar los campos Nombre y Apellido
+    7. Seleccionar el dropdown de Pais y seleccionar la opcion deseada
+    8. Generar un PIN de 4 digitos numericos
+    9. Finalizar el registro
+Resultado Esperado:
+ - El sistema redirige al usuario a la pantalla de Inicio.
+ - Mail de confirmacion en nuestro correo
+
+
+Caso de Prueba 2 – Registro de Correo ya registrado
+Título: Registro en Strix con datos ya existentes
+Precondición: El email debe estar registrado en la base de datos
+Steps:
+    1. Ingresar a https://clientes.test.aws.consumer.strix.com.ar/
+    2. Hacer click en "Crear cuenta"
+    3. Completar el campo Email con un correo validos, en donde contenga "@" como obligatorio
+    4. Completar el campo Contraseña de mas de 6 caracteres
+    5. Continuar para completar Perfil
+Resultado Esperado:
+El sistema debe mostrar un mensaje de error: "El e-mail ingresado ya se encuentra registrado."
+
+
+Caso de Prueba 3 – Registro de Contraseña Debil
+Título: Registro en Strix con una contraseña Debil
+Precondición: El usuario intenta usar una contraseña Debil
+Steps:
+    1. Ingresar a https://clientes.test.aws.consumer.strix.com.ar/
+    2. Hacer click en "Crear cuenta"
+    3. Completar el campo Email con un correo validos, en donde contenga "@" como obligatorio
+    4. Completar el campo Contraseña de menos de 6 digitos
+    5. Continuar para completar Perfil
+Resultado Esperado:
+El sistema debe mostrar un mensaje de error: "El campo debe contener al menos 6 caracteres"
+
+
+Caso de Prueba 3 – Registro de Contraseña con un caracter especial no permitido
+Título: Registro en Strix con una contraseña con un caracter especial no permitido
+Precondición: El usuario intenta usar una contraseña con un caracter especial no permitido
+Steps:
+    1. Ingresar a https://clientes.test.aws.consumer.strix.com.ar/
+    2. Hacer click en "Crear cuenta"
+    3. Completar el campo Email con un correo validos, en donde contenga "@" como obligatorio
+    4. Completar el campo Contraseña de menos de 6 digitos y con un signo no permitidos como "-"
+    5. Continuar para completar Perfil
+Resultado Esperado:
+El sistema debe mostrar un mensaje de error: "La contraseña contiene caracteres especiales no permitidos. Permitidos: /!@#$%^&*(),.?":{}|"
+
+
+
+
+Bug #1 – El sistema no valida correctamente el correo Nombre y Apellido
+Descripción: El sistema permite completar el registro con un Nombre y Apellido, solo numerico
+Steps:
+    1. Ingresar a https://clientes.test.aws.consumer.strix.com.ar/
+    2. Hacer click en "Crear cuenta"
+    3. Completar el campo Email con un correo validos, en donde contenga "@" como obligatorio
+    4. Completar el campo Contraseña de mas de 6 caracteres
+    5. Continuar para completar Perfil
+    6. Completar los campos Nombre y Apellido
+Resultado esperado: Deberia informar que los input Nombre y Apellido no deben ser numericos
+Resultado actual: El sistema permite continuar con la registracion
+Severidad: Mediana
+Evidencia:Revisar la carpeta /cypress/fixtures/Error_Email_Validation.png
+
+Bug #2 – Error en Validacion del Email
+Descripción: El email acepta extenciones numericas
+Data: {email: "123456@12345.com"}
+Steps:
+    1. Ingresar a https://clientes.test.aws.consumer.strix.com.ar/
+    2. Hacer click en "Crear cuenta"
+    3. Completar el campo Email con la data proporcionada.
+Resultado Esperado: El sistema debe mostrar un mensaje de error de error de validacion de email.
+Resultado actual: Se puede continuar con la registracion exitosa
+Severidad: Alta
+Evidencia: Revisar la carpeta /cypress/fixtures/Error_Email_Validation.png
+

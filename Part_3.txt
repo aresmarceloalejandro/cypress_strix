@@ -1,0 +1,26 @@
+Analisis y Resolución de Problemas
+
+Descripción del Problema
+    - Al intentar registrar el correo bla@bla.com, el sistema me permite continuar con la registracion, hasta la finalizacion que me confirma que ya se encuentra registrado
+
+Comportamiento Observado
+    - El flujo de registro se comporta correctamente con otros correos de prueba
+    - El fallo se presenta solo con el correo específico bla@bla.com.
+    - El error aparece en la última etapa del registro
+
+Analisis del Problema
+    - Monitoreo de red con herramientas como DevTools (F12 en el navegador):
+    - Validar que el endpoint https://api.test.aws.consumer.strix.com.ar/services/users/check_username?username=bla@bla.com sea el mismo que con un usuario posible
+    - Comparar el flujo con correos que no producen el error.
+    - Verificar si bla@bla.com ya esta almacenado en la base de datos, si esta incompleto o eliminado
+    - Confirmar si el frontend interpreta mal alguna respuesta                        
+    - Ver Cache, ya que al poner un email que no esta registrado, pero ya intente hacer una busqueda, me da error el endpoint, pero me permite terminar de registrarlo. Si agrego uno que nunca intente registrarlo, el endpoint me da 204.
+
+Posibles Causas
+    - El correo bla@bla.com puede estar parcialmente registrado en la base de datos
+    - El Frontend puede tener una logica atraves de este correo
+    - El Backend puede tener una validacion de estados en los correos
+
+Propuesta de Resolución
+    - Si ya el backend arroja un 404, el frontend no deberia dejar continuar con la actualizacion del Perfil
+    - Validar la base de datos y su estados
